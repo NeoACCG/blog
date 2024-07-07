@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>RSA小记-长期更新 - Ne0AC2G&#39;s blog</title><meta name="author" content="Ne0AC2G">
+<meta name="author-link" content="https://blog.aiitoj.cn/about">
+<meta name="description" content="之前iPad上手写推导了一部分，然后有时候也想结合应用，但一时半会太杂了，我就先把iPad上手写的推导放这里转为Latex存着，反正有空没事就捣鼓捣鼓，顺便记录一下实际场景结合" /><meta name="keywords" content='密码学' />
+  <meta itemprop="name" content="RSA小记-长期更新">
+  <meta itemprop="description" content="之前iPad上手写推导了一部分，然后有时候也想结合应用，但一时半会太杂了，我就先把iPad上手写的推导放这里转为Latex存着，反正有空没事就捣鼓捣鼓，顺便记录一下实际场景结合">
+  <meta itemprop="datePublished" content="2022-11-09T20:06:20+08:00">
+  <meta itemprop="dateModified" content="2022-11-09T20:06:20+08:00">
+  <meta itemprop="wordCount" content="693">
+  <meta itemprop="image" content="http://localhost:1313/test.jpg">
+  <meta itemprop="keywords" content="密码学"><meta property="og:url" content="http://localhost:1313/posts/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/">
+  <meta property="og:site_name" content="Ne0AC2G&#39;s blog">
+  <meta property="og:title" content="RSA小记-长期更新">
+  <meta property="og:description" content="之前iPad上手写推导了一部分，然后有时候也想结合应用，但一时半会太杂了，我就先把iPad上手写的推导放这里转为Latex存着，反正有空没事就捣鼓捣鼓，顺便记录一下实际场景结合">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-11-09T20:06:20+08:00">
+    <meta property="article:modified_time" content="2022-11-09T20:06:20+08:00">
+    <meta property="article:tag" content="密码学">
+    <meta property="og:image" content="http://localhost:1313/test.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/test.jpg">
+  <meta name="twitter:title" content="RSA小记-长期更新">
+  <meta name="twitter:description" content="之前iPad上手写推导了一部分，然后有时候也想结合应用，但一时半会太杂了，我就先把iPad上手写的推导放这里转为Latex存着，反正有空没事就捣鼓捣鼓，顺便记录一下实际场景结合">
+<meta name="application-name" content="Ne0AC2G&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Ne0AC2G&#39;s blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://localhost:1313/posts/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/" /><link rel="prev" href="http://localhost:1313/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/" /><link rel="next" href="http://localhost:1313/posts/xctf-gfsj0381-echo-server/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "RSA小记-长期更新",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0\/"
+    },"genre": "posts","keywords": "密码学","wordcount":  693 ,
+    "url": "http:\/\/localhost:1313\/posts\/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0\/","datePublished": "2022-11-09T20:06:20+08:00","dateModified": "2022-11-09T20:06:20+08:00","publisher": {
+      "@type": "Organization",
+      "name": "Ne0AC2G"},"author": {
+        "@type": "Person",
+        "name": "Ne0AC2G"
+      },"description": "之前iPad上手写推导了一部分，然后有时候也想结合应用，但一时半会太杂了，我就先把iPad上手写的推导放这里转为Latex存着，反正有空没事就捣鼓捣鼓，顺便记录一下实际场景结合"
+  }
+  </script></head>
+  <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+    <nav>
+      <ul class="menu"><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    
+</aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>RSA小记-长期更新</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://blog.aiitoj.cn/about" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/test.jpg"
+    data-srcset="/test.jpg, /test.jpg 1.5x, /test.jpg 2x"
+    data-sizes="auto"
+    alt="Ne0AC2G"
+    title="Ne0AC2G"/>&nbsp;Ne0AC2G</a></span></div>
+      <div class="post-meta-line"><span title=2022-11-09&#32;20:06:20><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-11-09">2022-11-09</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 693 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 2 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#rsa-theory理论">RSA theory（理论）</a>
+      <ul>
+        <li><a href="#rsa-derivation-procedure-推导过程">RSA derivation procedure （推导过程）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div
+      class="content"
+      id="content"
+      
+      
+    ><figure><img src="/posts/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/img/muse-long.png" width="100%">
+</figure>
+
+<h2 id="rsa-theory理论">RSA theory（理论）</h2>
+<h3 id="rsa-derivation-procedure-推导过程">RSA derivation procedure （推导过程）</h3>
+<blockquote class="blockquote-center">
+  <p>variable p and q is <strong>prime number</strong> ! （素数）</p>
+<p>now，let <strong>N=p*q</strong></p>
+
+</blockquote>
+<p>According to Euler function（欧拉函数）
+$$\because \varphi(n)=n(1-\frac{1}{p_1})(1-\frac{1}{p_2})(1-\frac{1}{p_3})&hellip;(1-\frac{1}{p_n})$$
+$$\varphi(n)=n\displaystyle\prod_{i=1}^n (1-\frac{1}{p_i}) $$
+$$
+\begin{cases}
+\varphi(p)=p-1 \\
+\varphi(q)=q-1
+\end{cases}
+$$
+$$
+\therefore
+\varphi(pq)=\varphi(p)\varphi(q)=(p-1)(q-1)=\varphi(N)
+$$</p>
+<p>Here, we get the conclusion $\varphi(N)=(p-1)(q-1)$</p>
+<p>let variable <strong>$r$</strong> be equal to $\varphi(N)$</p>
+<p>Then we take a random number <strong>$e$</strong> ($1&lt;e&lt;r$) and the condition is $gcd(e,r)=1$(取最大公约数),the purpose of this is to take <em><strong>modular multiplicative inverse element</strong></em>(这是模反元素的意思，你如果使用谷歌翻译和有道词典都没法正确地得到该词汇的正确英文解释)</p>
+<p>Let the modular multiplicative inverse element mentioned above be $d$</p>
+<p>$$
+ed\equiv 1 \pmod r \implies (ed-1) \bmod r =0
+$$</p>
+<p>$$\tag{Q1}\frac{ed-1}{r}=k \implies ed-1=kr$$</p>
+<div class="details admonition question open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>Q1<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><em><strong>由于本部分已经进入重点，且我的英语实在烂，暂时先用中文写着，其实写这篇小记也是为了顺带练英语的</strong></em></p>
+<p>当时这里没啥问题，但主要在通过下文的（我这下班写的，肚子咕咕叫，等回去再写，反正谷歌一下也知道我后面要干啥的），使用扩展欧里几德算法，在$\text{(mod r)}$这个条件下，出现$ed+kr=1$这种东西，并且还能得到以下方程
+$$
+\begin{cases}
+ed+kr=1 \\
+ed-kr=1 \\
+\end{cases}
+$$
+其实在维基百科上，中文的解释只有如下：</p>
+<blockquote>
+<p>事实上，$x+kn(k \in \mathbb{Z} )$都是$e$关于模$r$的模反元素，<em><strong>这里我们取最小的正整数解</strong></em></p>
+</blockquote>
+<p>但是这里的解释实在是让人无法让人安心，因为强迫症的缘故，还是想一探究竟（其实冥冥之中感觉到和k相关，联想到因轴的变化造成的方程不同，但还是一个方程）
+所以，从头翻了翻英文版的维基百科逐渐，在computation里找到了我们所需要支撑的一句话：</p>
+<blockquote>
+<p>In other words,integers x and y can be found to satisfy <em><strong>Bézout&rsquo;s identity</strong></em>(贝祖定理)</p>
+</blockquote>
+<p>这里的意思结合上面为：
+在使用扩展欧几里得算法求得模反元素之前，<strong>需要满足贝祖定理</strong></p>
+<p>而在贝祖定理的证明中（见proof章节），其第一句为：
+Given any non-zero integers a and b , let:</p>
+<p>$S=\lbrace ax+by:x,y \in \mathbb{Z} \And ax+by&gt;0 \rbrace$</p>
+</div>
+    </div>
+  </div>
+<p>《未完待续-回家干饭》</p></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2022-11-09&#32;20:06:20>更新于 2022-11-09&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/" data-title="RSA小记-长期更新"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/">密码学</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/" class="prev" rel="prev" title="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup</a>
+      <a href="/posts/xctf-gfsj0381-echo-server/" class="next" rel="next" title="GFSJ-0381-echo-server">GFSJ-0381-echo-server<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://blog.aiitoj.cn/about"target="_blank" rel="external nofollow noopener noreferrer">Ne0AC2G</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line ibruce">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div><div class="footer-line beian"><span class="icp footer-divider"><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2021018266号-1</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

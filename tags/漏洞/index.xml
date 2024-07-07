@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>漏洞 - 标签 - Ne0AC2G&#39;s blog</title>
+    <link>http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E/</link>
+    <description>漏洞 - 标签 - Ne0AC2G&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>jiangfengneo@gmail.com (Ne0AC2G)</managingEditor>
+      <webMaster>jiangfengneo@gmail.com (Ne0AC2G)</webMaster><lastBuildDate>Wed, 08 Mar 2023 17:01:40 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E6%BC%8F%E6%B4%9E/" rel="self" type="application/rss+xml" /><item>
+  <title>CVE-2023-21716 Microsoft Word远程代码执行漏洞（持续更新）</title>
+  <link>http://localhost:1313/posts/cve-2023-21716%E5%A4%8D%E7%8E%B0%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</link>
+  <pubDate>Wed, 08 Mar 2023 17:01:40 &#43;0800</pubDate>
+  <author>Ne0AC2G</author>
+  <guid>http://localhost:1313/posts/cve-2023-21716%E5%A4%8D%E7%8E%B0%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/</guid>
+  <description><![CDATA[CVE-2023-21716]]></description>
+</item>
+</channel>
+</rss>

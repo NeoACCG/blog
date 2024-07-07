@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Categories - 分类 - Ne0AC2G&#39;s blog</title>
+    <link>http://localhost:1313/categories/</link>
+    <description>Categories - 分类 - Ne0AC2G&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>jiangfengneo@gmail.com (Ne0AC2G)</managingEditor>
+      <webMaster>jiangfengneo@gmail.com (Ne0AC2G)</webMaster><atom:link href="http://localhost:1313/categories/" rel="self" type="application/rss+xml" /></channel>
+</rss>

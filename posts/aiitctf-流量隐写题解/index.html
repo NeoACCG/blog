@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>AiitCTF wireshark流量分析题解 - Ne0AC2G&#39;s blog</title><meta name="author" content="Ne0AC2G">
+<meta name="author-link" content="https://blog.aiitoj.cn/about">
+<meta name="description" content="AiitCTF方向班平台 wireshark流量分析" /><meta name="keywords" content='方向班挑战-题解' />
+  <meta itemprop="name" content="AiitCTF wireshark流量分析题解">
+  <meta itemprop="description" content="AiitCTF方向班平台 wireshark流量分析">
+  <meta itemprop="datePublished" content="2022-09-27T10:59:27+08:00">
+  <meta itemprop="dateModified" content="2022-09-27T10:59:27+08:00">
+  <meta itemprop="wordCount" content="462">
+  <meta itemprop="image" content="http://localhost:1313/test.jpg">
+  <meta itemprop="keywords" content="方向班挑战-题解"><meta property="og:url" content="http://localhost:1313/posts/aiitctf-%E6%B5%81%E9%87%8F%E9%9A%90%E5%86%99%E9%A2%98%E8%A7%A3/">
+  <meta property="og:site_name" content="Ne0AC2G&#39;s blog">
+  <meta property="og:title" content="AiitCTF wireshark流量分析题解">
+  <meta property="og:description" content="AiitCTF方向班平台 wireshark流量分析">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2022-09-27T10:59:27+08:00">
+    <meta property="article:modified_time" content="2022-09-27T10:59:27+08:00">
+    <meta property="article:tag" content="方向班挑战-题解">
+    <meta property="og:image" content="http://localhost:1313/test.jpg">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="http://localhost:1313/test.jpg">
+  <meta name="twitter:title" content="AiitCTF wireshark流量分析题解">
+  <meta name="twitter:description" content="AiitCTF方向班平台 wireshark流量分析">
+<meta name="application-name" content="Ne0AC2G&#39;s blog">
+<meta name="apple-mobile-web-app-title" content="Ne0AC2G&#39;s blog"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="canonical" href="http://localhost:1313/posts/aiitctf-%E6%B5%81%E9%87%8F%E9%9A%90%E5%86%99%E9%A2%98%E8%A7%A3/" /><link rel="prev" href="http://localhost:1313/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" /><link rel="next" href="http://localhost:1313/posts/exchange-server-2022-9-28%E6%BC%8F%E6%B4%9E%E5%B0%8F%E6%9E%90/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "AiitCTF wireshark流量分析题解",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:1313\/posts\/aiitctf-%E6%B5%81%E9%87%8F%E9%9A%90%E5%86%99%E9%A2%98%E8%A7%A3\/"
+    },"genre": "posts","keywords": "方向班挑战-题解","wordcount":  462 ,
+    "url": "http:\/\/localhost:1313\/posts\/aiitctf-%E6%B5%81%E9%87%8F%E9%9A%90%E5%86%99%E9%A2%98%E8%A7%A3\/","datePublished": "2022-09-27T10:59:27+08:00","dateModified": "2022-09-27T10:59:27+08:00","publisher": {
+      "@type": "Organization",
+      "name": "Ne0AC2G"},"author": {
+        "@type": "Person",
+        "name": "Ne0AC2G"
+      },"description": "AiitCTF方向班平台 wireshark流量分析"
+  }
+  </script></head>
+  <body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+    <nav>
+      <ul class="menu"><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li class="menu-item text-center">
+              <a
+                class="menu-link"
+                href="/about/"
+                
+                
+              ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Ne0AC2G&#39;s blog"><span class="header-title-text">Ne0AC2G&#39;s blog</span></a></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容 ..." id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-book fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 文章</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-users fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 友链</a></li><li
+              class="menu-item text-center"
+            ><a
+                  class="menu-link"
+                  href="/about/"
+                  
+                  
+                ><i class="fa-solid fa-info-circle fa-fw fa-sm fa-fw fa-sm" aria-hidden="true"></i> 关于</a></li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container" data-page-style="normal"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    
+</aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX">
+        <span>AiitCTF wireshark流量分析题解</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://blog.aiitoj.cn/about" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img
+    class="lazyload avatar"
+    src="/svg/loading.min.svg"
+    data-src="/test.jpg"
+    data-srcset="/test.jpg, /test.jpg 1.5x, /test.jpg 2x"
+    data-sizes="auto"
+    alt="Ne0AC2G"
+    title="Ne0AC2G"/>&nbsp;Ne0AC2G</a></span></div>
+      <div class="post-meta-line"><span title=2022-09-27&#32;10:59:27><i class="fa-regular fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-09-27">2022-09-27</time></span>&nbsp;<span><i class="fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i> 约 462 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw" aria-hidden="true"></i> 预计阅读 1 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#2019年安信工信息安全方向班个人题解合集-1">2019年安信工信息安全方向班个人题解合集-1</a></li>
+  </ul>
+</nav></div>
+      </div><div
+      class="content"
+      id="content"
+      
+      
+    ><p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/reimen/2.jpg"
+    data-srcset="/reimen/2.jpg, /reimen/2.jpg 1.5x, /reimen/2.jpg 2x"
+    data-sizes="auto"
+    alt="reimen2"
+    title="reimen2"/></p>
+<h2 id="2019年安信工信息安全方向班个人题解合集-1">2019年安信工信息安全方向班个人题解合集-1</h2>
+<p>主要是饭点快到了，我就想着顺手写一下吧</p>
+<p>首先我们先打开这题，在这里我其实已经提示了这题是有题解的，再做不来神仙也救不了</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27.png, /screenshot/Screenshot-2022-09-27.png 1.5x, /screenshot/Screenshot-2022-09-27.png 2x"
+    data-sizes="auto"
+    alt="截图1"
+    title="截图1"/></p>
+<p>下面我们下载该数据包，用wireshark打开查看</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-2.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-2.png, /screenshot/Screenshot-2022-09-27-2.png 1.5x, /screenshot/Screenshot-2022-09-27-2.png 2x"
+    data-sizes="auto"
+    alt="截图2"
+    title="截图2"/></p>
+<blockquote>
+<p>当然这么一个一个看实属是费劲，我们右键一下菜单，点击<strong>追踪流</strong> 选中<strong>TCP流</strong></p>
+</blockquote>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-3.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-3.png, /screenshot/Screenshot-2022-09-27-3.png 1.5x, /screenshot/Screenshot-2022-09-27-3.png 2x"
+    data-sizes="auto"
+    alt="截图3"
+    title="截图3"/>
+<img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-4.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-4.png, /screenshot/Screenshot-2022-09-27-4.png 1.5x, /screenshot/Screenshot-2022-09-27-4.png 2x"
+    data-sizes="auto"
+    alt="截图4"
+    title="截图4"/></p>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>提示<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">注意那个红色区域以及蓝色区域，那里分别是http请求和返回</div>
+    </div>
+  </div>
+<p>根据这个路径我们可以得知这是在进行某种上传操作，而结合数据尾部列举的三个文件</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-5.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-5.png, /screenshot/Screenshot-2022-09-27-5.png 1.5x, /screenshot/Screenshot-2022-09-27-5.png 2x"
+    data-sizes="auto"
+    alt="截图5"
+    title="截图5"/></p>
+<p>我们注意到，这个压缩包的时间是2018-06-03 10:11:59这个时间出现的，而在上面的通讯数据中也发现其中一条响应体时间也是一样的</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-6.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-6.png, /screenshot/Screenshot-2022-09-27-6.png 1.5x, /screenshot/Screenshot-2022-09-27-6.png 2x"
+    data-sizes="auto"
+    alt="截图6"
+    title="截图6"/></p>
+<p>更进一步确定了该请求题中包含的十六进制流是该文件的猜想,那么我们就提取这些十六进制，丢到010editor内生成reverse.zip压缩包</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-7.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-7.png, /screenshot/Screenshot-2022-09-27-7.png 1.5x, /screenshot/Screenshot-2022-09-27-7.png 2x"
+    data-sizes="auto"
+    alt="截图7"
+    title="截图7"/></p>
+<p>得到压缩包文件，二维码的内容也就是flag啦</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-8.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-8.png, /screenshot/Screenshot-2022-09-27-8.png 1.5x, /screenshot/Screenshot-2022-09-27-8.png 2x"
+    data-sizes="auto"
+    alt="截图8"
+    title="截图8"/></p>
+<div class="details admonition example open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ol fa-fw" aria-hidden="true"></i>第二条路<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>其实观察这个十六进制前的内容，可以猜测是base64的数据，毕竟也是网络中传输所用的常用编码形式</p>
+<p><img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-9-1.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-9-1.png, /screenshot/Screenshot-2022-09-27-9-1.png 1.5x, /screenshot/Screenshot-2022-09-27-9-1.png 2x"
+    data-sizes="auto"
+    alt="截图9-1"
+    title="截图9-1"/>|<img
+    class="lazyload"
+    src="/svg/loading.min.svg"
+    data-src="/screenshot/Screenshot-2022-09-27-9-2.png"
+    data-srcset="/screenshot/Screenshot-2022-09-27-9-2.png, /screenshot/Screenshot-2022-09-27-9-2.png 1.5x, /screenshot/Screenshot-2022-09-27-9-2.png 2x"
+    data-sizes="auto"
+    alt="截图9-2"
+    title="截图9-2"/></p>
+<p>可以看出是个php的代码，在写入文件的操作，有php编译器的直接扔过去也能生成</p>
+</div>
+    </div>
+  </div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title=2022-09-27&#32;10:59:27>更新于 2022-09-27&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="http://localhost:1313/posts/aiitctf-%E6%B5%81%E9%87%8F%E9%9A%90%E5%86%99%E9%A2%98%E8%A7%A3/" data-title="AiitCTF wireshark流量分析题解"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%96%B9%E5%90%91%E7%8F%AD%E6%8C%91%E6%88%98-%E9%A2%98%E8%A7%A3/">方向班挑战-题解</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="prev" rel="prev" title="我的第一篇博客"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>我的第一篇博客</a>
+      <a href="/posts/exchange-server-2022-9-28%E6%BC%8F%E6%B4%9E%E5%B0%8F%E6%9E%90/" class="next" rel="next" title="Exchange-Server-2022年9月28日漏洞小析">Exchange-Server-2022年9月28日漏洞小析<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://blog.aiitoj.cn/about"target="_blank" rel="external nofollow noopener noreferrer">Ne0AC2G</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div><div class="footer-line ibruce">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div><div class="footer-line beian"><span class="icp footer-divider"><a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2021018266号-1</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric">0%</span>
+        </div></div><div id="mask"></div><div class="reading-progress-bar" style="left: 0;top: 0;"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lazysizes/lazysizes.min.js" async defer></script><script src="/lib/twemoji/twemoji.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/copy-tex.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"autoBookmark":true,"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":50},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"},"twemoji":true};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>逆向工程 - 标签 - Ne0AC2G&#39;s blog</title>
+    <link>http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/</link>
+    <description>逆向工程 - 标签 - Ne0AC2G&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>jiangfengneo@gmail.com (Ne0AC2G)</managingEditor>
+      <webMaster>jiangfengneo@gmail.com (Ne0AC2G)</webMaster><lastBuildDate>Tue, 15 Nov 2022 08:32:32 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" rel="self" type="application/rss+xml" /><item>
+  <title>GFSJ-0381-echo-server</title>
+  <link>http://localhost:1313/posts/xctf-gfsj0381-echo-server/</link>
+  <pubDate>Tue, 15 Nov 2022 08:32:32 &#43;0800</pubDate>
+  <author>Ne0AC2G</author>
+  <guid>http://localhost:1313/posts/xctf-gfsj0381-echo-server/</guid>
+  <description><![CDATA[攻防世界 Re题 echo server]]></description>
+</item>
+</channel>
+</rss>

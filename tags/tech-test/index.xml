@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Tech Test - 标签 - Ne0AC2G&#39;s blog</title>
+    <link>http://localhost:1313/tags/tech-test/</link>
+    <description>Tech Test - 标签 - Ne0AC2G&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>jiangfengneo@gmail.com (Ne0AC2G)</managingEditor>
+      <webMaster>jiangfengneo@gmail.com (Ne0AC2G)</webMaster><lastBuildDate>Fri, 23 Sep 2022 11:18:20 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/tech-test/" rel="self" type="application/rss+xml" /><item>
+  <title>我的第一篇博客</title>
+  <link>http://localhost:1313/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</link>
+  <pubDate>Fri, 23 Sep 2022 11:18:20 &#43;0800</pubDate>
+  <author>Ne0AC2G</author>
+  <guid>http://localhost:1313/posts/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</guid>
+  <description><![CDATA[整个测试玩捏]]></description>
+</item>
+</channel>
+</rss>
